@@ -1,5 +1,6 @@
 import os
 from unittest import result
+from flask import render_template
 import requests
 import json
 from dotenv import load_dotenv
@@ -13,6 +14,9 @@ headers = {
   'x-rapidapi-host': "wordsapiv1.p.rapidapi.com"
 }
 
+def index_page():
+  return "index_page function"
+
 def get_random_word():
   response = requests.get(f'{base_uri}/words/?random=true', headers=headers)
   json_response = response.json()
@@ -20,7 +24,7 @@ def get_random_word():
   try:
     word = json_response["word"]
     results = json_response["results"]
-    # definition = json_response["results"][0]
+    definition = json_response["results"][0]
     print("Word: " + word)
     print("Definition: " + results[0]['definition'])
     print("Type of word:")
@@ -28,6 +32,14 @@ def get_random_word():
       print(typeof)
   except:
     print("Word missing definition or type.")
+
+def json_output():
+  response = requests.get(f'{base_uri}/words/?random=true', headers=headers)
+  json_response = response.json()
+  json_dumps = json.dumps(json_response, indent=0)
+  return json_dumps
+
+
 
 
 if __name__ == '__main__':
