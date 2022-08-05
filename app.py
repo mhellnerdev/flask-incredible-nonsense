@@ -1,16 +1,19 @@
 from weakref import getweakrefcount
-from flask import Flask
+from flask import Flask, render_template
 import get_word
 
 app = Flask(__name__)
 
 @app.route("/")
 def index():
-  return get_word.index_page()
+  return render_template("first_page.html")
+
+
+
 
 
 @app.route("/json")
-def about():
+def json_words():
   return get_word.json_output()
 
 
