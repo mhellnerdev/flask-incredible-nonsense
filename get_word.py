@@ -16,10 +16,6 @@ headers = {
   'x-rapidapi-host': WORDS_URI
 }
 
-# func to return name of current file to import
-# def get_python_file():
-#   return __name__
-
 # func to print and return word, definition, and typeof word. this also outputs a list
 def get_random_word():
   response = requests.get(f'{base_uri}/words/persian', headers=headers)
