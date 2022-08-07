@@ -1,3 +1,5 @@
+# get_word.py
+
 import os
 from random import random
 
@@ -5,6 +7,9 @@ import requests
 import json
 from dotenv import load_dotenv
 import traceback
+
+from prepositions import random_preposition
+
 
 load_dotenv()
 WORDS_API_KEY = os.getenv('WORDS_API_KEY')
@@ -16,53 +21,53 @@ headers = {
   'x-rapidapi-host': WORDS_URI
 }
 
-# func to print and return word, definition, and typeof word. this also outputs a list
-def get_random_word():
-  response = requests.get(f'{base_uri}/words/persian', headers=headers)
-  json_response = response.json()
+# # func to print and return word, definition, and typeof word. this also outputs a list
+# def get_random_word_full():
+#   response = requests.get(f'{base_uri}/words/persian', headers=headers)
+#   json_response = response.json()
 
-  try:
-    # store word key in json_response to word var
-    word = json_response["word"]
+#   try:
+#     # store word key in json_response to word var
+#     word = json_response["word"]
     
-    # store results list. can be indexed by results[0]['{key}']
-    results = json_response["results"]
+#     # store results list. can be indexed by results[0]['{key}']
+#     results = json_response["results"]
     
-    print("Word: " + word)
+#     print("Word: " + word)
     
-    # # store pronunciation
-    # pronunciation =  json_response["pronunciation"]
-    # print("Pronunciation: " + pronunciation['all'])
+#     # # store pronunciation
+#     # pronunciation =  json_response["pronunciation"]
+#     # print("Pronunciation: " + pronunciation['all'])
 
-    # store type of words into a list
-    for typeof_list in results:
-      type_list = (typeof_list['typeOf'])
+#     # store type of words into a list
+#     for typeof_list in results:
+#       type_list = (typeof_list['typeOf'])
           
-    for types in type_list:
-      typelisted = types
+#     for types in type_list:
+#       typelisted = types
 
 
-    for result_list in results:
-      print("Definition: " + result_list['definition'])
-      print("Type of word:")
-      print(typelisted)
+#     for result_list in results:
+#       print("Definition: " + result_list['definition'])
+#       print("Type of word:")
+#       print(typelisted)
 
 
-    # # debug code  
-    print(type(types)) # used for debugging
+#     # # debug code  
+#     print(type(types)) # used for debugging
   
-  except Exception as e:
-    print('There was an exception error!')
-    traceback.print_exc() # debugging
-    print(str(e))
-    # print("Word missing definition or type.")
+#   except Exception as e:
+#     print('There was an exception error!')
+#     traceback.print_exc() # debugging
+#     print(str(e))
+#     # print("Word missing definition or type.")
 
 
 
 def get_random_word_json():
   response = requests.get(f'{base_uri}/words/?random=true', headers=headers)
   json_response = response.json()
-  return json_response
+  return  json_response
 
 
 
@@ -73,11 +78,13 @@ def word_and_definition():
         random_word = random_json['word']
         random_results = random_json['results']
         random_definition = random_json['results'][0]['definition']
-        print(random_word)
+        print()
+        print("Random Word: " + random_word)
         # print(random_results)
-        print(random_definition)
+        print("Random Definition: " + random_definition)
       except Exception as e:
-        print(e)
+        # print(traceback.print_exc()) # throws debug if cant find 'results' key 
+        # print(e)
         continue
       else:
         break
@@ -86,34 +93,45 @@ def word_and_definition():
 
 def create_random_word_list():
   word_list=[]
-  for word in range(5):
-    # get_random_word_json()
-    response = requests.get(f'{base_uri}/words/?random=true', headers=headers)
-    json_response = response.json()
+  # i = 0
+  for word in range(100):
+    json_response = get_random_word_json()
     word = json_response['word']
     word_list.append(word)
+    # i += 1 # used to check api calls in loop
+    # print(f"API Call {i}") # used to check api calls in loop
+    # print(word) # used for if you want word printed on each loop
   return word_list
 
 
 
 def list_random_words():
   word_list = create_random_word_list()
+  print()
+  print("========= WORD LIST =========")
   for word in word_list:
-    print(word)  
+    # print(word, end=" ")    
+    print(word)
+  # word_and_definition() 
 
 
 
-def json_output():
-  response = requests.get(f'{base_uri}/words/?random=true', headers=headers)
-  json_response = response.json()
-  json_dumps = json.dumps(json_response, indent=0)
-  return json_dumps
-
+def list_sentence():
+  word_list = create_random_word_list()
+  for word in word_list:
+    preposition = random_preposition()
+    print(word, end=" ")
+    print(preposition, end=" ")
+  print()
+  
+    
 
 
 
 if __name__ == '__main__':
   # get_random_word_json()
   # create_random_word_list()
-  list_random_words()
+  # word_and_definition()
+  # list_random_words()
+  list_sentence()
   
