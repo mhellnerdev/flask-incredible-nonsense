@@ -21,6 +21,7 @@ headers = {
   'x-rapidapi-host': WORDS_URI
 }
 
+
 # # func to print and return word, definition, and typeof word. this also outputs a list
 # def get_random_word_full():
 #   response = requests.get(f'{base_uri}/words/persian', headers=headers)
@@ -63,7 +64,14 @@ headers = {
 #     # print("Word missing definition or type.")
 
 
+# take in number for amount of words to output
+def input_values():
+  word_number = int(input("Length of incredible nonsense: "))
+  return word_number
 
+
+
+# function to connect to api and store a json response
 def get_random_word_json():
   response = requests.get(f'{base_uri}/words/?random=true', headers=headers)
   json_response = response.json()
@@ -71,36 +79,38 @@ def get_random_word_json():
 
 
 
+# function to loop through words until word with definiton is found
 def word_and_definition():
-    while True:
-      try:
-        random_json = get_random_word_json()
-        random_word = random_json['word']
-        random_results = random_json['results']
-        random_definition = random_json['results'][0]['definition']
-        print()
-        print("Random Word: " + random_word)
-        # print(random_results)
-        print("Random Definition: " + random_definition)
-      except Exception as e:
-        # print(traceback.print_exc()) # throws debug if cant find 'results' key 
-        # print(e)
-        continue
-      else:
-        break
+  while True:
+    try:
+      random_json = get_random_word_json()
+      random_word = random_json['word']
+      random_results = random_json['results']
+      random_definition = random_json['results'][0]['definition']
+      print()
+      print("Random Word: " + random_word)
+      # print(random_results)
+      print("Definition: " + random_definition)
+    except Exception as e:
+      # print(traceback.print_exc()) # throws debug if cant find 'results' key 
+      # print(e)
+      continue
+    else:
+      break
 
 
 
 def create_random_word_list():
   word_list=[]
-  # i = 0
-  for word in range(100):
+  word_number = input_values()
+  # i = 0 # debug variable for code in loop
+  for word in range(word_number):
     json_response = get_random_word_json()
     word = json_response['word']
     word_list.append(word)
     # i += 1 # used to check api calls in loop
-    # print(f"API Call {i}") # used to check api calls in loop
-    # print(word) # used for if you want word printed on each loop
+    # print(f"API Call {i}") # debug use to check api calls in loop
+    # print(word) # debug use for if you want word printed on each loop
   return word_list
 
 
@@ -110,9 +120,7 @@ def list_random_words():
   print()
   print("========= WORD LIST =========")
   for word in word_list:
-    # print(word, end=" ")    
     print(word)
-  # word_and_definition() 
 
 
 
@@ -123,7 +131,7 @@ def list_sentence():
     print(word, end=" ")
     print(preposition, end=" ")
   print()
-  
+
     
 
 
