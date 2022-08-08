@@ -6,11 +6,14 @@ from random import random
 import requests
 import json
 from dotenv import load_dotenv
+from datetime import datetime
 import traceback
+
 
 from prepositions import random_preposition
 
-
+now = datetime.now() # get current datetime
+dt = now.strftime("%Y-%m-%d_%H.%M.%S")
 
 
 load_dotenv()
@@ -74,10 +77,12 @@ def create_random_word_list():
     # print(f"API Call {i}") # debug use to check api calls in loop
     # print(word) # debug use for if you want word printed on each loop
   
-  with open("words_list.json", "w") as outfile:
+  with open("words_list_" + dt + ".json", "w") as outfile:
     json.dump(word_list, outfile)
 
   return word_list
+
+
 
 def create_random_word_dict():
   # word_list = []
@@ -90,8 +95,11 @@ def create_random_word_dict():
     word_key += 1    # iterate key value
     word_dict[word_key] = word    # add word to dict
   print(word_dict)    # prints the dict
+
+  #output file
   with open("words_dict.json", "w") as outfile:
     json.dump(word_dict, outfile)
+
   return(word_dict)
 
 
