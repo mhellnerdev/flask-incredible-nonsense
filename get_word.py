@@ -125,7 +125,7 @@ def list_sentence():
     # print(preposition, end=" ")
     sentence += word + " "
     sentence += preposition + " "
-  print(sentence)
+  # print(sentence)
   return sentence
   
 

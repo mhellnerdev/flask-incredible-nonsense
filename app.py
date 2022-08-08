@@ -5,13 +5,13 @@ import get_word
 
 app = Flask(__name__)
 
-@app.route("/")
-def index():
-  return render_template(
-    "jinja.html",
-    name = "Mark Hellner",
-    template_name = __name__ + ".py"
-  )
+# @app.route("/")
+# def index():
+#   return render_template(
+#     "jinja.html",
+#     name = "flask-dev",
+#     template_name = __name__ + ".py"
+#   )
 
 @app.route("/expressions/")
 def hello_expressions():
@@ -55,7 +55,7 @@ def hello_expressions():
     )
 
 
-@app.route("/randomsentence/")
+@app.route("/")
 def random_sentence():
 
   incredible_nonsense = get_word.format_sentence()
