@@ -58,7 +58,7 @@ def hello_expressions():
 @app.route("/randomsentence/")
 def random_sentence():
 
-  incredible_nonsense = get_word.list_sentence()
+  incredible_nonsense = get_word.format_sentence()
 
   return render_template(
     "randomsentence.html",
@@ -74,7 +74,7 @@ def json_words():
 
 
 if __name__ == '__main__':
-  app.run()
+  app.run(host='0.0.0.0', port=80)
 
 
 

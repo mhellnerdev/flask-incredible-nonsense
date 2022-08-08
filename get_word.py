@@ -70,9 +70,9 @@ def word_and_definition():
 
 def create_random_word_list():
   word_list = []
-  word_number = input_values()
+  # word_number = input_values()
   # i = 0 # debug variable for code in loop
-  for word in range(word_number):
+  for word in range(10):
     json_response = get_random_word_json()
     word = json_response['word']
     word_list.append(word)
@@ -82,8 +82,8 @@ def create_random_word_list():
     # print(word) # debug use for if you want word printed on each loop
   # pprint(word_list)
 
-  with open(SAVE_PATH + "wordlist_" + dt + ".json", "w") as outfile:
-    json.dump(word_list, outfile)
+  # with open(SAVE_PATH + "wordlist_" + dt + ".json", "w") as outfile:
+  #   json.dump(word_list, outfile)
 
   return word_list
 
@@ -93,8 +93,8 @@ def create_random_word_dict():
   # word_list = []
   word_dict = {}    # define a dict
   word_key = 0      # key for dict. used to iterate key as an int
-  word_number = input_values()
-  for word in range(word_number):
+  # word_number = input_values()
+  for word in range(10):
     json_response = get_random_word_json()
     word = json_response['word']
     word_key += 1    # iterate key value
@@ -102,8 +102,8 @@ def create_random_word_dict():
   pprint(word_dict)    # prints the dict
 
   #output file
-  with open(SAVE_PATH + "worddict_" + dt + ".json", "w") as outfile:
-    json.dump(word_dict, outfile)
+  # with open(SAVE_PATH + "worddict_" + dt + ".json", "w") as outfile:
+  #   json.dump(word_dict, outfile)
 
   return word_dict
 
@@ -118,17 +118,21 @@ def list_random_words():
 
 def list_sentence():
   word_list = create_random_word_list()
+  sentence = ""
   for word in word_list:
     preposition = random_preposition()
-    print(word, end=" ")
-    print(preposition, end=" ")
-  str = word + preposition
-  print()
-  return str
+    # print(word, end=" ")
+    # print(preposition, end=" ")
+    sentence += word + " "
+    sentence += preposition + " "
+  print(sentence)
+  return sentence
   
 
 def format_sentence():
-  return
+  sentence = list_sentence()
+  print(sentence.capitalize())
+  return sentence.capitalize()
 
 
 
@@ -139,8 +143,8 @@ if __name__ == '__main__':
   # word_and_definition()
   # list_random_words()
   # create_random_word_dict()
-  list_sentence()
-  # format_sentence()
+  # list_sentence()
+  format_sentence()
 
 
 
