@@ -53,9 +53,21 @@ def hello_expressions():
     # last_name=last_name,
     
     )
+
+
+@app.route("/randomsentence/")
+def random_sentence():
+
+  incredible_nonsense = get_word.list_sentence()
+
+  return render_template(
+    "randomsentence.html",
+    incredible_nonsense=incredible_nonsense
+  )
+
   
 
-@app.route("/json/words")
+@app.route("/json/words/")
 def json_words():
   return
 

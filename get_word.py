@@ -1,17 +1,20 @@
 # get_word.py
 
 import os
-from random import random
 
 import requests
 import json
 from dotenv import load_dotenv
-from datetime import datetime
 import traceback
+
+
+from pprint import pprint
 
 
 from prepositions import random_preposition
 
+
+from datetime import datetime
 now = datetime.now() # get current datetime
 dt = now.strftime("%Y-%m-%d_%H.%M.%S")
 
@@ -20,6 +23,7 @@ load_dotenv()
 WORDS_API_KEY = os.getenv('WORDS_API_KEY')
 base_uri = os.getenv('BASE_URI')
 WORDS_URI = os.getenv('WORDS_URI')
+SAVE_PATH = os.getenv('SAVE_PATH')
 
 headers = {
   'x-rapidapi-key': WORDS_API_KEY,
@@ -76,8 +80,9 @@ def create_random_word_list():
     # i += 1 # used to check api calls in loop
     # print(f"API Call {i}") # debug use to check api calls in loop
     # print(word) # debug use for if you want word printed on each loop
-  
-  with open("wordlist_" + dt + ".json", "w") as outfile:
+  # pprint(word_list)
+
+  with open(SAVE_PATH + "wordlist_" + dt + ".json", "w") as outfile:
     json.dump(word_list, outfile)
 
   return word_list
@@ -94,21 +99,18 @@ def create_random_word_dict():
     word = json_response['word']
     word_key += 1    # iterate key value
     word_dict[word_key] = word    # add word to dict
-  print(word_dict)    # prints the dict
+  pprint(word_dict)    # prints the dict
 
   #output file
-  with open("worddict_" + dt + ".json", "w") as outfile:
+  with open(SAVE_PATH + "worddict_" + dt + ".json", "w") as outfile:
     json.dump(word_dict, outfile)
 
   return word_dict
 
 
 
-
 def list_random_words():
   word_list = create_random_word_list()
-  print()
-  print("========= WORD LIST =========")
   for word in word_list:
     print(word)
 
@@ -120,9 +122,14 @@ def list_sentence():
     preposition = random_preposition()
     print(word, end=" ")
     print(preposition, end=" ")
+  str = word + preposition
   print()
+  return str
+  
 
-    
+def format_sentence():
+  return
+
 
 
 
@@ -131,8 +138,9 @@ if __name__ == '__main__':
   # create_random_word_list()
   # word_and_definition()
   # list_random_words()
-  create_random_word_dict()
-  # list_sentence()
+  # create_random_word_dict()
+  list_sentence()
+  # format_sentence()
 
 
 
