@@ -77,7 +77,7 @@ def create_random_word_list():
     # print(f"API Call {i}") # debug use to check api calls in loop
     # print(word) # debug use for if you want word printed on each loop
   
-  with open("words_list_" + dt + ".json", "w") as outfile:
+  with open("wordlist_" + dt + ".json", "w") as outfile:
     json.dump(word_list, outfile)
 
   return word_list
@@ -97,10 +97,10 @@ def create_random_word_dict():
   print(word_dict)    # prints the dict
 
   #output file
-  with open("words_dict.json", "w") as outfile:
+  with open("worddict_" + dt + ".json", "w") as outfile:
     json.dump(word_dict, outfile)
 
-  return(word_dict)
+  return word_dict
 
 
 
@@ -131,8 +131,8 @@ if __name__ == '__main__':
   # create_random_word_list()
   # word_and_definition()
   # list_random_words()
-  # create_random_word_dict()
-  list_sentence()
+  create_random_word_dict()
+  # list_sentence()
 
 
 
