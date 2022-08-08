@@ -9,12 +9,12 @@ prepositions = [
   "above",
   "across",
   "after",
-  "against,"
+  "against",
   "along",
   "amid",
   "among",
   "anti",
-  "around,"
+  "around",
   "as",
   "at",
   "before",
