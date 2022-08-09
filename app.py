@@ -5,13 +5,26 @@ import get_word
 
 app = Flask(__name__)
 
-# @app.route("/")
-# def index():
-#   return render_template(
-#     "jinja.html",
-#     name = "flask-dev",
-#     template_name = __name__ + ".py"
-#   )
+@app.route("/")
+def index():
+
+  incredible_nonsense = get_word.format_sentence()
+  
+  return render_template("html/index.html", incredible_nonsense=incredible_nonsense)
+
+
+
+@app.route("/randomsentence/")
+def random_sentence():
+
+  incredible_nonsense = get_word.format_sentence()
+
+  return render_template(
+    "randomsentence.html",
+    incredible_nonsense=incredible_nonsense
+  )
+
+
 
 @app.route("/expressions/")
 def hello_expressions():
@@ -55,17 +68,7 @@ def hello_expressions():
     )
 
 
-@app.route("/")
-def random_sentence():
-
-  incredible_nonsense = get_word.format_sentence()
-
-  return render_template(
-    "randomsentence.html",
-    incredible_nonsense=incredible_nonsense
-  )
-
-  
+ 
 
 @app.route("/json/words/")
 def json_words():
