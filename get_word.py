@@ -72,7 +72,7 @@ def create_random_word_list():
   word_list = []
   # word_number = input_values()
   # i = 0 # debug variable for code in loop
-  for word in range(10):
+  for word in range(20):
     json_response = get_random_word_json()
     word = json_response['word']
     word_list.append(word)
