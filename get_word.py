@@ -131,7 +131,7 @@ def list_sentence():
 
 def format_sentence():
   sentence = list_sentence()
-  print(sentence.capitalize())
+  # print(sentence.capitalize())
   return sentence.capitalize()
 
 
