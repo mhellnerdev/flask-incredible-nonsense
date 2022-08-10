@@ -49,11 +49,11 @@ def word_and_definition():
       random_definition = random_json['results'][0]['definition']
       print()
       print("Random Word: " + random_word)
-      # print(random_results)
+      print(random_results)
       print("Definition: " + random_definition)
     except Exception as e:
-      # print(traceback.print_exc()) # throws debug if cant find 'results' key 
-      # print(e)
+      print(traceback.print_exc()) # throws exception if cant find 'results' key 
+      print(e)
       continue
     else:
       break
@@ -62,7 +62,7 @@ def word_and_definition():
 def create_random_word_list():
   word_list = []
   # number_of_words = input_values()
-  # i = 0 # debug variable for code in loop
+  # i = 0 
   for word in range(20):
     json_response = get_random_word_json()
     word = json_response['word']
@@ -71,7 +71,7 @@ def create_random_word_list():
     # i += 1 
     # print(f"API Call {i}")
     # print(word)
-  output_file(word_list)
+  # output_file(word_list)
   return word_list
 
 
