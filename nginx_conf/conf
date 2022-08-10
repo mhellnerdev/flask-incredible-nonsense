@@ -50,7 +50,8 @@ server {
     include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
     ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
 
-    # 500 error alternate page
+    # error alternate pages
+		error_page 404 /errorPages/404.html;
 		error_page 500 502 503 504 /errorPages/error.html;
     location /errorPages/ {
       root /var/www/html;
