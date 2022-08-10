@@ -1,3 +1,3 @@
 #!/bin/sh
 
-gunicorn --bind 0.0.0.0:80 -w 3 run:app
+gunicorn --bind 0.0.0.0:5000 -w 3 app:app
