@@ -8,23 +8,19 @@ app = Flask(__name__)
 @app.route("/")
 def index():
   incredible_nonsense = get_word.format_sentence()  
-  return render_template("html/index.html", incredible_nonsense=incredible_nonsense)
-
+  return render_template(
+    "html/index.html",
+    incredible_nonsense=incredible_nonsense
+  )
 
 
 @app.route("/randomsentence/")
 def random_sentence():
   incredible_nonsense = get_word.format_sentence()
   return render_template(
-    "randomsentence.html",
+    "index.html",
     incredible_nonsense=incredible_nonsense
   )
-
-
-
-
-
-
 
 
 @app.route("/expressions/")
