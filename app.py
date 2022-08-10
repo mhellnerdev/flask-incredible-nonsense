@@ -18,7 +18,7 @@ def index():
 def random_sentence():
   incredible_nonsense = get_word.format_sentence()
   return render_template(
-    "index.html",
+    "html/index.html",
     incredible_nonsense=incredible_nonsense
   )
 
@@ -75,6 +75,3 @@ def json_words():
 
 if __name__ == '__main__':
   app.run(host='0.0.0.0', port=5000)
-
-
-
