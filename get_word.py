@@ -7,16 +7,13 @@ import json
 from dotenv import load_dotenv
 import traceback
 
-
 from pprint import pprint
-
 
 from prepositions import random_preposition
 
-
 from datetime import datetime
-now = datetime.now() # get current datetime
-dt = now.strftime("%Y-%m-%d_%H.%M.%S")
+
+
 
 
 load_dotenv()
@@ -34,8 +31,8 @@ headers = {
 
 # take in number for amount of words to output
 def input_values():
-  word_number = int(input("How much incredible nonsense? "))
-  return word_number
+  number_of_words = int(input("How much incredible nonsense? "))
+  return number_of_words
 
 
 
@@ -70,50 +67,38 @@ def word_and_definition():
 
 def create_random_word_list():
   word_list = []
-  # word_number = input_values()
+  # number_of_words = input_values()
   # i = 0 # debug variable for code in loop
   for word in range(20):
     json_response = get_random_word_json()
     word = json_response['word']
     word_list.append(word)
 
-    # i += 1 # used to check api calls in loop
+    # i += 1 # debug use to check api calls in loop
     # print(f"API Call {i}") # debug use to check api calls in loop
     # print(word) # debug use for if you want word printed on each loop
-  # pprint(word_list)
 
   # with open(SAVE_PATH + "wordlist_" + dt + ".json", "w") as outfile:
   #   json.dump(word_list, outfile)
-
+  output_file(word_list)
   return word_list
 
 
-
 def create_random_word_dict():
-  # word_list = []
   word_dict = {}    # define a dict
   word_key = 0      # key for dict. used to iterate key as an int
-  # word_number = input_values()
   for word in range(10):
     json_response = get_random_word_json()
     word = json_response['word']
     word_key += 1    # iterate key value
     word_dict[word_key] = word    # add word to dict
-  pprint(word_dict)    # prints the dict
-
-  #output file
-  # with open(SAVE_PATH + "worddict_" + dt + ".json", "w") as outfile:
-  #   json.dump(word_dict, outfile)
-
   return word_dict
-
 
 
 def list_random_words():
   word_list = create_random_word_list()
   for word in word_list:
-    print(word)
-
+    return(word)
 
 
 def list_sentence():
@@ -121,19 +106,21 @@ def list_sentence():
   sentence = ""
   for word in word_list:
     preposition = random_preposition()
-    # print(word, end=" ")
-    # print(preposition, end=" ")
     sentence += word + " "
     sentence += preposition + " "
-  # print(sentence)
   return sentence
   
 
 def format_sentence():
   sentence = list_sentence()
-  # print(sentence.capitalize())
   return sentence.capitalize()
 
+
+def output_file(f):
+  now = datetime.now() # get current datetime
+  dt = now.strftime("%Y-%m-%d_%H.%M.%S")
+  with open(SAVE_PATH + "wordlist_" + dt + ".json", "w") as outfile:
+    json.dump(f, outfile)
 
 
 
