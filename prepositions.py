@@ -77,15 +77,11 @@ prepositions = [
 ]
 
 
-
 def random_preposition():
   random_preposition = (random.choice(prepositions))
   return random_preposition
 
 
 
-
-# if name == main
 if __name__ == "__main__":
   random_preposition()
-
