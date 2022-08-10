@@ -28,10 +28,10 @@ RUN pip install -r requirements.txt
 COPY . /incrediblenonsense/
 
 # next line has been commented out, use this command to run in development mode
-CMD flask --app app.py --debug run --host=0.0.0.0 --port=5000
+# CMD flask --app app.py --debug run --host=0.0.0.0 --port=5000
 
 # run bash script to start PRODUCTION Flask server via UWSGI/gunicorn production engine
-# CMD ./gunicorn.sh
+CMD ./gunicorn.sh
 
 
 
