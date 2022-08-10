@@ -1,7 +1,6 @@
 # get_word.py
 
 import os
-
 import requests
 import json
 from dotenv import load_dotenv
@@ -12,8 +11,6 @@ from pprint import pprint
 from prepositions import random_preposition
 
 from datetime import datetime
-
-
 
 
 load_dotenv()
@@ -35,13 +32,11 @@ def input_values():
   return number_of_words
 
 
-
 # function to connect to api and store a json response
 def get_random_word_json():
   response = requests.get(f'{base_uri}/words/?random=true', headers=headers)
   json_response = response.json()
   return  json_response
-
 
 
 # function to loop through words until word with definiton is found
@@ -64,7 +59,6 @@ def word_and_definition():
       break
 
 
-
 def create_random_word_list():
   word_list = []
   # number_of_words = input_values()
@@ -73,13 +67,10 @@ def create_random_word_list():
     json_response = get_random_word_json()
     word = json_response['word']
     word_list.append(word)
-
-    # i += 1 # debug use to check api calls in loop
-    # print(f"API Call {i}") # debug use to check api calls in loop
-    # print(word) # debug use for if you want word printed on each loop
-
-  # with open(SAVE_PATH + "wordlist_" + dt + ".json", "w") as outfile:
-  #   json.dump(word_list, outfile)
+    # # debug use to check api calls in loop
+    # i += 1 
+    # print(f"API Call {i}")
+    # print(word)
   output_file(word_list)
   return word_list
 
