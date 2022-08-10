@@ -34,15 +34,13 @@ CMD flask --app app.py --debug run --host=0.0.0.0 --port=5000
 # CMD ./gunicorn.sh
 
 
-'''
+
 #### NOTES ####
 # This file is currently !setup to run the bash script ./gunicorn.sh. This 
-launches the flask server with multi thread workers to handle requests. 
-Without this you cannot have concurrent http requests.
+# launches the flask server with multi thread workers to handle requests. 
+# Without this you cannot have concurrent http requests.
 
 
-- docker command to run container mapping to http port and passing environment variable for debug mode true.
-- this is to be used only when running in development mode
-- docker run -p 80:<port defined in app.run> -e DEBUG=1 <image name>
-
-'''
+# - docker command to run container mapping to http port and passing environment variable for debug mode true.
+# - this is to be used only when running in development mode
+# - docker run -p 80:<port defined in app.run> -e DEBUG=1 <image name>
