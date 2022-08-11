@@ -3,14 +3,15 @@ FROM python:3-alpine
 
 # set docker OS level env variables
 ENV PYTHONUNBUFFERED 1
-ENV FLASK_APP=run.py
 
 # apt install required OS dependencies that allow gcc to compile the python package requirements correctly
-RUN apk update && apk add gcc libc-dev make git libffi-dev openssl-dev python3-dev libxml2-dev libxslt-dev
+RUN apk update && apk add gcc libc-dev make git libffi-dev openssl-dev python3-dev libxml2-dev libxslt-dev iptables
 
-# using ufw to open port 80 http
-RUN apk add ufw
-RUN ufw allow http
+# # using ufw to open port 80 http
+# RUN apk add ufw
+# RUN ufw allow http
+# RUN ufw allow https
+# RUN ufw allow 5000
 
 # create folder on container os for flask app to live
 RUN mkdir /incrediblenonsense
@@ -19,9 +20,10 @@ RUN mkdir /incrediblenonsense
 WORKDIR /incrediblenonsense
 
 # copy python package dependency file
-COPY requirements.txt /incrediblenonsense
+COPY requirements.txt /incrediblenonsense/
 
 # use pip to install packages on container os that are defined in the requirements.txt
+RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
 # copy contents of . or local hosts folder to the WORKDIR on the container
@@ -31,7 +33,9 @@ COPY . /incrediblenonsense/
 # CMD flask --app app.py --debug run --host=0.0.0.0 --port=5000
 
 # run bash script to start PRODUCTION Flask server via UWSGI/gunicorn production engine
-CMD ./gunicorn.sh
+# CMD sh ./gunicorn.sh
+# CMD chmod +x ./gunicorn.sh
+ENTRYPOINT ["sh", "./gunicorn.sh"]
 
 
 
