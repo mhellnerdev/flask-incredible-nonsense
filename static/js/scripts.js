@@ -5,3 +5,7 @@ function loading() {
     $("#footer").hide();
 }
   // ]]>
+
+  window.onload = chooseImgl
+
+  var myImg = imgArray{""}
