@@ -1,12 +1,14 @@
 div#loading {
   display: none;
   cursor: wait;
+  text-align: center;
 }
 
 div#loading img {
   display: block;
-  margin-top: 5em;
+  margin-top: 2em;
   margin-left: auto;
   margin-right: auto;
   height: auto;
 }
+
