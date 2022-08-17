@@ -7,12 +7,6 @@ ENV PYTHONUNBUFFERED 1
 # apt install required OS dependencies that allow gcc to compile the python package requirements correctly
 RUN apk update && apk add gcc libc-dev make git libffi-dev openssl-dev python3-dev libxml2-dev libxslt-dev iptables
 
-# # using ufw to open port 80 http
-# RUN apk add ufw
-# RUN ufw allow http
-# RUN ufw allow https
-# RUN ufw allow 5000
-
 # create folder on container os for flask app to live
 RUN mkdir /incrediblenonsense
 
@@ -45,6 +39,6 @@ ENTRYPOINT ["sh", "./gunicorn.sh"]
 # Without this you cannot have concurrent http requests.
 
 
-# - docker command to run container mapping to http port and passing environment variable for debug mode true.
+# - docker command to run container, map http to port, and pas environment variable for debug mode true.
 # - this is to be used only when running in development mode
 # - docker run -p 80:<port defined in app.run> -e DEBUG=1 <image name>
