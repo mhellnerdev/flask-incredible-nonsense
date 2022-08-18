@@ -27,8 +27,6 @@ COPY . /incrediblenonsense/
 # CMD flask --app app.py --debug run --host=0.0.0.0 --port=5000
 
 # run bash script to start PRODUCTION Flask server via UWSGI/gunicorn production engine
-# CMD sh ./gunicorn.sh
-# CMD chmod +x ./gunicorn.sh
 ENTRYPOINT ["sh", "./gunicorn.sh"]
 
 
